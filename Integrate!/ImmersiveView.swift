@@ -24,11 +24,21 @@ struct ImmersiveView: View {
 
                 // Put skybox here.  See example in World project available at
                 // https://developer.apple.com/
-                let box = ModelEntity(mesh: .generateBox(size: 3), materials: [SimpleMaterial(color: .red, isMetallic: false)])
-                
-                box.transform.translation = [0, 0, -1]
+                let box = ModelEntity(mesh: .generateBox(size: 0.5), materials: [SimpleMaterial(color: .red, isMetallic: false)])
                 
                 immersiveContentEntity.addChild(box)
+                box.transform.translation = [0, 0, -3]
+                
+                
+                let physicsBox = ModelEntity(mesh: .generateBox(size: SIMD3<Float>(1, 1, 1)))
+                physicsBox.components.set(PhysicsBodyComponent(shapes: [.generateBox(size: SIMD3<Float>(1, 1, 1))], mass: 3))
+
+                
+                physicsBox.transform.translation = [1, 2, -3]
+                
+                immersiveContentEntity.addChild(physicsBox)
+                
+                           
             }
         }
     }
