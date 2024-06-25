@@ -2,11 +2,10 @@
 //  ContentView.swift
 //  Integrate!
 //
-//  Created by Om Raheja on 6/10/24.
+//  Created by Om Raheja on 6/25/24.
 //
 
 import SwiftUI
-import SwiftData
 import RealityKit
 import RealityKitContent
 
@@ -17,67 +16,41 @@ struct ContentView: View {
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
-    
-    @Environment(\.modelContext) var modelContext
-    
-    @State private var immersify: Bool = false;
-    
-    @AppStorage("firstRun") private var firstRun = true
 
     var body: some View {
+        VStack {
+            Model3D(named: "Scene", bundle: realityKitContentBundle)
+                .padding(.bottom, 50)
 
-            VStack {
-                Text("Let's get started.")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                HStack {
-                    VStack {
-                        Button("Level 1") {
-                            Task {
-                                
-                                let result = await openImmersiveSpace(id: "level1")
-                                if case .error = result {
-                                    print("there was an error")
-                                }
-                            }
-                        }
-                        
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Text("Button1")
-                        })
-                        
+            Text("Hello, world!")
+
+            Toggle("Show ImmersiveSpace", isOn: $showImmersiveSpace)
+                .font(.title)
+                .frame(width: 360)
+                .padding(24)
+                .glassBackgroundEffect()
+        }
+        .padding()
+        .onChange(of: showImmersiveSpace) { _, newValue in
+            Task {
+                if newValue {
+                    switch await openImmersiveSpace(id: "ImmersiveSpace") {
+                    case .opened:
+                        immersiveSpaceIsShown = true
+                    case .error, .userCancelled:
+                        fallthrough
+                    @unknown default:
+                        immersiveSpaceIsShown = false
+                        showImmersiveSpace = false
                     }
-                    
-                    VStack {
-                        Button(action: {}, label: {
-                            Text("Button1")
-                        })
-                        Button(action: {}, label: {
-                            Text("Button1")
-                        })
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Text("Button1")
-                        })
-                        
-                    }
-                    
-                    VStack {
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Text("Button1")
-                        })
-                        Button(action: {}, label: {
-                            Text("Button1")
-                        })
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Text("Button1")
-                        })
-                        
-                    }
+                } else if immersiveSpaceIsShown {
+                    await dismissImmersiveSpace()
+                    immersiveSpaceIsShown = false
                 }
-
+            }
         }
     }
 }
-
 
 #Preview(windowStyle: .automatic) {
     ContentView()

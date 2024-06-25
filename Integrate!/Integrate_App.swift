@@ -2,7 +2,7 @@
 //  Integrate_App.swift
 //  Integrate!
 //
-//  Created by Om Raheja on 6/10/24.
+//  Created by Om Raheja on 6/25/24.
 //
 
 import SwiftUI
@@ -10,12 +10,12 @@ import SwiftUI
 @main
 struct Integrate_App: App {
     var body: some Scene {
-        WindowGroup("Hello World", id: "modules") {
+        WindowGroup {
             ContentView()
         }
 
-        ImmersiveSpace(id: "level1") {
+        ImmersiveSpace(id: "ImmersiveSpace") {
             ImmersiveView()
-        }
+        }.immersionStyle(selection: .constant(.full), in: .full)
     }
 }
