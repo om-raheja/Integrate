@@ -16,7 +16,10 @@ struct ImmersiveView: View {
         RealityView { content in
             // Make it immserive
             if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
-                content.add(immersiveContentEntity)
+                //content.add(immersiveContentEntity)
+                
+                let entity = try? Entity.load(named:  "Box")
+                content.add(entity.unsafelyUnwrapped)
                 
                 // Add an ImageBasedLight for the immersive content
                 // Two orbs behind the ContentView
