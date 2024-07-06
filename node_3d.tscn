@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://lv02y2lcyf62"]
+[gd_scene load_steps=6 format=3 uid="uid://lv02y2lcyf62"]
+
+[ext_resource type="Script" path="res://print.gd" id="1_5gnj1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4v7u2"]
 
@@ -13,6 +15,8 @@ size = Vector3(60, 2, 60)
 [node name="Node3D" type="Node3D"]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+script = ExtResource("1_5gnj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("BoxMesh_4v7u2")
@@ -32,3 +36,6 @@ mesh = SubResource("BoxMesh_kxrp8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.96165, 3.71906e-09, -0.274278, 0.0888072, -0.946131, 0.311368, -0.259503, -0.323785, -0.909847, 0.515077, 0.372045, 0.00214052)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.801421, 0, 0.598101, 0, 1, 0, -0.598101, 0, -0.801421, 11.5425, 5.73484, -8.06446)
