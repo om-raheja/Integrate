@@ -16,6 +16,7 @@ size = Vector3(60, 2, 60)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 10, 2.08165e-12)
+collision_mask = 9
 script = ExtResource("1_5gnj1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
@@ -27,7 +28,7 @@ shape = SubResource("BoxShape3D_g8dor")
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -1, 2.08165e-12)
 shape = SubResource("BoxShape3D_modgs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
@@ -39,3 +40,18 @@ transform = Transform3D(0.96165, 3.71906e-09, -0.274278, 0.0888072, -0.946131, 0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.801421, 0, 0.598101, 0, 1, 0, -0.598101, 0, -0.801421, 11.5425, 5.73484, -8.06446)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.125
+anchor_bottom = 0.245
+offset_left = -3.0
+offset_bottom = 1.24
+
+[node name="Window" type="Window" parent="Control"]
+position = Vector2i(0, 36)
+visible = false
+
+[node name="Label" type="Label" parent="Control/Window"]
+offset_right = 40.0
+offset_bottom = 23.0
