@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://lv02y2lcyf62"]
+[gd_scene load_steps=8 format=3 uid="uid://lv02y2lcyf62"]
 
 [ext_resource type="Script" path="res://print.gd" id="1_5gnj1"]
+[ext_resource type="Script" path="res://windowhide.gd" id="2_lqpv0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4v7u2"]
 
@@ -11,6 +12,8 @@ size = Vector3(60, 2, 60)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kxrp8"]
 size = Vector3(60, 2, 60)
+
+[sub_resource type="LabelSettings" id="LabelSettings_367bu"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -47,10 +50,39 @@ anchor_bottom = 0.245
 offset_left = -3.0
 offset_bottom = 1.24
 
-[node name="Window" type="Window" parent="Control"]
-position = Vector2i(0, 36)
-visible = false
+[node name="Prompt" type="Window" parent="Control"]
+unique_name_in_owner = true
+initial_position = 1
+size = Vector2i(400, 300)
 
-[node name="Label" type="Label" parent="Control/Window"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Prompt"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/Prompt/VBoxContainer"]
+layout_mode = 2
+text = "What is the velocity of the box right before it
+touches the ground?"
+label_settings = SubResource("LabelSettings_367bu")
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Control/Prompt/VBoxContainer"]
+layout_mode = 2
+
+[node name="EvalButton" type="Button" parent="Control/Prompt/VBoxContainer"]
+layout_mode = 2
+text = "Check"
+script = ExtResource("2_lqpv0")
+
+[node name="GGButton" type="Button" parent="Control"]
+visible = false
+offset_left = 200.0
+offset_top = 200.0
+offset_right = 232.0
+offset_bottom = 231.0
+text = "GG"
+metadata/_edit_group_ = true
