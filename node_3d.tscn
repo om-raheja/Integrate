@@ -80,6 +80,7 @@ script = ExtResource("2_lqpv0")
 
 [node name="GGButton" type="Button" parent="Control"]
 visible = false
+layout_mode = 0
 offset_left = 200.0
 offset_top = 200.0
 offset_right = 232.0
